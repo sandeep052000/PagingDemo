@@ -1,0 +1,34 @@
+﻿@model PaginatedList<CustomersEntity>
+
+<p>
+    <table class=table>
+        <thead>
+            <tr>
+                <th>@Html.DisplayName("CustomerID")</th>
+                <th>@Html.DisplayName("CompanyName")</th>
+                <th>@Html.DisplayName("ContactTitle")</th>
+                <th>@Html.DisplayName("ContactName")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var items in Model){
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => items.CustomerId)</td>
+                    <td>@Html.DisplayFor(modelitem => items.CompanyName)</td>
+                    <td>@Html.DisplayFor(modelitem => items.ContactTitle)</td>
+                    <td>@Html.DisplayFor(modelitem => items.ContactName)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>
+
+@{
+    var prevDisabled = !Model.HasPreviousPge ? "disabled" : "";
+
+    var nextDisabled = !Model.HasNextPge ? "disabled" : "";
+
+}
+
+<a asp-action="Index" asp-route-PageNumber="@(Model.PageIndex-1)" class ="btn btn-default @prevDisabled">Previous</a>
+<a asp-action="Index" asp-route-PageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">Next</a>
